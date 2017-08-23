@@ -149,5 +149,6 @@ public class UserMapperTest extends TestCase {
 			session.close();
 		}
 	}
+	
 
 }

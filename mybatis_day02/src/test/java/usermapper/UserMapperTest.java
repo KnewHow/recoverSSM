@@ -3,6 +3,7 @@ package usermapper;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -132,6 +133,18 @@ public class UserMapperTest extends TestCase {
 		try {
 			UserMapper userMapper = session.getMapper(UserMapper.class);
 			System.out.println(userMapper.findUserCount());
+		} finally {
+			session.close();
+		}
+	}
+
+	@Test
+	public void testFindUserByIdMap() {
+		SqlSession session = this.sqlSessionFactory.openSession();
+		try {
+			UserMapper userMapper = session.getMapper(UserMapper.class);
+			Map<String, String> map = userMapper.findUserByIdMap(10);
+		System.out.println(map);
 		} finally {
 			session.close();
 		}

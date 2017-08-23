@@ -87,6 +87,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT COUNT(1) FROM user;
 	</select>
 
+	<select id="findUserByIdMap" parameterType="int" resultType="hashMap">
+		SELECT *
+		FROM `user` WHERE id=#{id}
+	</select>
+
 
 </mapper>
 

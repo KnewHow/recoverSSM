@@ -2,6 +2,7 @@ package mapper;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import pojo.User;
 import pojo.UserQueryVo;
@@ -36,5 +37,7 @@ public interface UserMapper {
 	public List<User> findUserByHashMap(HashMap<String, String> hashMap);
 
 	public int findUserCount();
+
+	public Map<String, String> findUserByIdMap(int userId);
 
 }

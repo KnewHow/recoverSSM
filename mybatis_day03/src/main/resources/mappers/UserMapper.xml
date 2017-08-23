@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.UserMapper">
+
+	<sql id="query_user_where_one">
+		<where>
+			<if test="user.username!=null and user.username!=''">
+				AND username LIKE '%${user.username}%'
+			</if>
+
+			<if test="ids!=null and ids.size>0">
+				<foreach collection="ids" item="user_id" open="AND (" close=")"
+					separator="OR">
+					id=#{user_id}
+				</foreach>
+			</if>
+		</where>
+	</sql>
+
+	<sql id="query_user_where_two">
+		<where>
+			<if test="user!=null and user.username!=null and user.username!=''">
+				AND username LIKE '%${user.username}%'
+			</if>
+			<if test="ids!=null and ids.size>0">
+				<foreach collection="ids" item="user_id" open=" AND id IN ("
+					close=")" separator=",">
+					#{user_id}
+				</foreach>
+			</if>
+		</where>
+	</sql>
+
+	<sql id="query_user_by_ids">
+		<where>
+			<if test="list!=null and list.size>0">
+				<foreach collection="list" item="user" open="AND id IN("
+					close=")" separator=",">
+					<if test="user.id!=null">
+						#{user.id}
+					</if>
+				</foreach>
+			</if>
+		</where>
+	</sql>
+
+	<sql id="query_user_by_array_ids">
+		<where>
+			<foreach collection="array" index="index" item="id" open="AND id IN ("
+				close=")" separator=",">
+				#{id}
+			</foreach>
+		</where>
+	</sql>
+	<select id="findUserList1" parameterType="pojo.User" resultType="pojo.User">
+		SELECT *FROM user
+		WHERE 1=1
+		<if test="sex!=null and sex!=''">
+			AND sex=#{sex}
+		</if>
+		<if test="username!=null and username!=''">
+			AND username LIKE '%${username}%'
+		</if>
+		<!-- SEX=#{SEX} AND USERNAME LIKE '%${USERNAME}%'; -->
+	</select>
+
+	<select id="findUserList2" parameterType="pojo.User" resultType="pojo.User">
+		SELECT *FROM user
+		<where>
+			<!-- <where />可以自动处理第一个and。 -->
+			<if test="sex!=null and sex!=''">
+				AND sex=#{sex}
+			</if>
+
+			<if test="username!=null and username!=''">
+				AND username LIKE '%${username}%'
+			</if>
+		</where>
+	</select>
+
+	<select id="findUserComplexCondition1" parameterType="pojo.UserQueryVo"
+		resultType="pojo.User">
+		<!-- SELECT *FROM user WHERE username LIKE '%张%' AND (id=10 OR id=89 OR 
+			id=16 OR id =16); -->
+		SELECT *FROM user
+		<where>
+			<if test="user.name!=null and user.name!=''">
+				AND username LIKE '%${user.username}%'
+			</if>
+			<if test="ids!=null and ids.size>0">
+				<foreach collection="ids" item="user_id" open="AND (" close=")"
+					separator="OR">
+					id=#{user_id}
+				</foreach>
+			</if>
+		</where>
+	</select>
+
+	<select id="findUserComplexCondition1_recommand" parameterType="pojo.UserQueryVo"
+		resultType="pojo.User">
+		SELECT * FROM user
+		<include refid="query_user_where_one"></include>
+	</select>
+
+	<select id="findUserComplexCondition2" parameterType="pojo.UserQueryVo"
+		resultType="pojo.User">
+		SELECT *FROM user
+		<include refid="query_user_where_two"></include>
+	</select>
+
+	<select id="findUserByUserIds" parameterType="List" resultType="pojo.User">
+		SELECT *FROM user
+		<include refid="query_user_by_ids">
+		</include>
+	</select>
+
+	<select id="findUserByArrayIds" parameterType="Object[]"
+		resultType="pojo.User">
+		SELECT *FROM user
+		<include refid="query_user_by_array_ids"></include>
+	</select>
+
+	<resultMap type="pojo.User" id="user_result_map">
+		<id column="id_" property="id" />
+		<result column="_username" property="username" />
+	</resultMap>
+
+	<select id="findUserByIdAccessResultMap" resultMap="user_result_map">
+		SELECT id _id,username _username FROM user
+	</select>
+</mapper>
+
+

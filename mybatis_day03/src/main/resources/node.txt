@@ -1,0 +1,8 @@
+Just test use dynamic SQL
+<code>
+	<mappers>
+
+		<!-- mapper method -->
+		<package name="mapper" />
+	</mappers>
+</code>

@@ -109,7 +109,7 @@ public class UserMapperTest {
 			ids.add(89);
 			UserQueryVo queryVo = new UserQueryVo();
 			queryVo.setIds(ids);
-//			queryVo.setUser(user);
+			// queryVo.setUser(user);
 			List<User> list = userMapper.findUserComplexCondition2(queryVo);
 			System.out.println(list.size());
 		} finally {

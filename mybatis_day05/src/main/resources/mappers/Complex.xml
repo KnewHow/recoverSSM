@@ -5,7 +5,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="mapper.ComplexMapper">
 
-	<resultMap type="" id="all_orders_resultMap"></resultMap>
+	<resultMap type="pojo.Orders" id="all_orders_resultMap">
+		<id column="id" property="id" />
+		<result column="user_id" property="userId" />
+		<result column="number" property="number" />
+		<result column="createtime" property="createtime" />
+		<result column="node" property="node" />
+		<association property="user" javaType="pojo.User" select="findUserById"
+			column="user_id" />
+
+	</resultMap>
+
+	<select id="findUserById" parameterType="int" resultType="pojo.User">
+		SELECT
+		*
+		FROM
+		`user`
+		WHERE id=#{value}
+	</select>
+
+
 	<select id="findAllOrders" resultMap="all_orders_resultMap">
 		SELECT
 		*

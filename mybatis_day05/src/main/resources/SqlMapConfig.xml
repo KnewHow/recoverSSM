@@ -9,7 +9,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<properties resource="db.properties" />
 
 	<settings>
-		<setting name="cacheEnabled" value="true" />
+		<setting name="lazyLoadingEnabled" value="true" />
+		<setting name="aggressiveLazyLoading" value="false" />
 	</settings>
 	<!-- 和spring整合后 environments配置将废除 -->
 	<environments default="development">
@@ -28,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 
 
 	<mappers>
-		<mapper resource="mappers/OrderMapper.xml" />
+		<mapper resource="mappers/Complex.xml" />
 	</mappers>
 
 

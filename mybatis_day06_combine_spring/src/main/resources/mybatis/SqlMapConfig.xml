@@ -10,6 +10,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 
 	<mappers>
 		<mapper resource="mybatis/User.xml" />
+		<!-- <mapper resource="mybatis/UserMapper.xml" /> -->
+		<!-- <package name="erongdu.mapper"/> -->
 	</mappers>
 
 </configuration>

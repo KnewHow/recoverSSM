@@ -29,14 +29,26 @@
 
 	<!-- setting SqlSessionFactoy -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="mapperLocations" value="mybatis/SqlMapConfig.xml" />
+		<property name="configLocation" value="mybatis/SqlMapConfig.xml" />
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
 	<bean id="userDao" class="erongdu.dao.UserDaoImpl">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
 	</bean>
-	
-	
+
+
+	<!-- <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean"> 
+		<property name="mapperInterface" value="erongdu.mapper.UserMapper"></property> 
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property> </bean> -->
+
+	<!-- in practice,we will too much mappers,we don't to write each time So 
+		we will user a scanner to scan all mapper.java. it demand *.xml and *.java 
+		is at same folder -->
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="erongdu.mapper" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+	</bean>
 
 </beans>

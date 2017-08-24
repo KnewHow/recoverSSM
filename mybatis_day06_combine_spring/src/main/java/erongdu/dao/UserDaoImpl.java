@@ -5,7 +5,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import erongdu.pojo.User;
 
-public class UserDaoImpl implements UserDao {
+public class UserDaoImpl  implements UserDao {
 
 	private SqlSessionFactory sqlSessionFactory;
 

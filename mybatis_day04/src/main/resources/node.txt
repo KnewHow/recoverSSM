@@ -1,12 +1,1 @@
-Just test use dynamic SQL
-<code>
-	<mappers>
-
-		<!-- mapper method -->
-		<package name="mapper" />
-	</mappers>
-</code>
-
-pojo.Item
-/mybatis_day04/src/main/java/pojo/Items.java
-pojo.Items
+In this ,we just to use complex search SQL by mybatis

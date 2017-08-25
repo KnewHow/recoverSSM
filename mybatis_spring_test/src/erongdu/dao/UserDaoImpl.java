@@ -8,7 +8,7 @@ public class UserDaoImpl extends SqlSessionDaoSupport implements UserDao {
 
 	@Override
 	public User getUserById(int id) {
-			return this.getSqlSession().selectOne("test.findUserById", id);
+		return this.getSqlSession().selectOne("test.findUserById", id);
 	}
 
 }

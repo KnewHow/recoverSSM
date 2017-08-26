@@ -29,10 +29,11 @@
 
 	<!-- setting SqlSessionFactoy -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="configLocation" value="mybatis/SqlMapConfig.xml" />
+		<property name="configLocation" value="classpath:mybatis/SqlMapConfig.xml" />
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
+	<!-- scan all mapper -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="erongdu.mapper" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />

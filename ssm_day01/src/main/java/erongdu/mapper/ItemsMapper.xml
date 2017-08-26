@@ -6,9 +6,46 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <!-- namespace命名空间，作用就是对sql进行分类化管理，理解sql隔离 注意：使用mapper代理方法开发，namespace有特殊重要的作用 -->
 <mapper namespace="erongdu.mapper.ItemsMapper">
 
+
+	<sql id="updateItems_sql">
+
+		UPDATE items SET
+		<if test="name!=null and name!=''">
+			name=#{name},
+		</if>
+
+		<if test="price!=null">
+			price=#{price},
+		</if>
+
+		<if test="detail!=null and detail!=''">
+			detail=#{detail}
+		</if>
+		
+		<where>
+			id=#{id}
+		</where>
+
+
+	</sql>
+
 	<select id="findAllItems" resultType="erongdu.pojo.Items">
 		SELECT
 		* FROM items
+	</select>
+
+	<select id="findItemsById" parameterType="int" resultType="erongdu.pojo.Items">
+		SELECT
+		*
+		FROM
+		items
+		WHERE
+		id = #{id};
+	</select>
+
+
+	<select id="updateItems" parameterType="erongdu.pojo.Items">
+		<include refid="updateItems_sql"></include>
 	</select>
 
 </mapper>

@@ -20,4 +20,21 @@ public interface ItemsService {
 	 * @return A <code>List</code> to store {@link Items}
 	 */
 	public List<Items> findAllItems();
+
+	/**
+	 * Find {@link Items} by id
+	 * 
+	 * @param id
+	 *            The id of {@link Items}
+	 * @return A {@link Items} object
+	 */
+	public Items findItemsById(Integer id);
+
+	/**
+	 * Update items by id
+	 * 
+	 * @param items
+	 *            The {@link Items} object,it must contain id
+	 */
+	public void updateItems(Items items);
 }

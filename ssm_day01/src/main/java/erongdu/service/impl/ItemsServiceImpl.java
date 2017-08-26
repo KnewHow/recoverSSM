@@ -20,4 +20,14 @@ public class ItemsServiceImpl implements ItemsService {
 		return this.itemsMapper.findAllItems();
 	}
 
+	@Override
+	public Items findItemsById(Integer id) {
+		return this.itemsMapper.findItemsById(id);
+	}
+
+	@Override
+	public void updateItems(Items items) {
+		this.itemsMapper.updateItems(items);
+	}
+
 }

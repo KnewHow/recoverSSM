@@ -19,7 +19,7 @@ public interface ItemsService {
 	 * 
 	 * @return A <code>List</code> to store {@link Items}
 	 */
-	public List<Items> findAllItems();
+	public List<Items> findAllItems() throws Exception;
 
 	/**
 	 * Find {@link Items} by id
@@ -28,7 +28,7 @@ public interface ItemsService {
 	 *            The id of {@link Items}
 	 * @return A {@link Items} object
 	 */
-	public Items findItemsById(Integer id);
+	public Items findItemsById(Integer id) throws Exception;
 
 	/**
 	 * Update items by id
@@ -36,5 +36,5 @@ public interface ItemsService {
 	 * @param items
 	 *            The {@link Items} object,it must contain id
 	 */
-	public void updateItems(Items items);
+	public void updateItems(Items items) throws Exception;
 }

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,7 +26,7 @@ public class ItemsController {
 	private ItemsService itemsService;
 
 	@RequestMapping("/queryItems")
-	public ModelAndView findAllItems() {
+	public ModelAndView findAllItems() throws Exception {
 		List<Items> itemsList = this.itemsService.findAllItems();
 
 		ModelAndView mv = new ModelAndView();
@@ -36,8 +37,17 @@ public class ItemsController {
 	}
 
 	@RequestMapping(value = "/queryItemsById", method = { RequestMethod.POST, RequestMethod.GET })
-	public ModelAndView queryItemsById(
-			@RequestParam(value = "id", required = true, defaultValue = "1") Integer itemId) {
+	public ModelAndView queryItemsById(@RequestParam(value = "id", required = true, defaultValue = "1") Integer itemId)
+			throws Exception {
+		Items items = this.itemsService.findItemsById(itemId);
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("items", items);
+		mv.setViewName("items/editItems");
+		return mv;
+	}
+
+	@RequestMapping(value = "/viewItems/{id}", method = { RequestMethod.POST, RequestMethod.GET })
+	public ModelAndView viewItems(@PathVariable("id") Integer itemId) throws Exception {
 		Items items = this.itemsService.findItemsById(itemId);
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("items", items);
@@ -46,7 +56,7 @@ public class ItemsController {
 	}
 
 	@RequestMapping(value = "/updateItems", method = { RequestMethod.POST, RequestMethod.GET })
-	public ModelAndView updateItems(Items items) {
+	public ModelAndView updateItems(Items items) throws Exception {
 		this.itemsService.updateItems(items);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("success");

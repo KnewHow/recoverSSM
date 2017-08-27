@@ -17,7 +17,7 @@ public class ItemsServiceTest {
 	}
 
 	@Test
-	public void testFindAllItems() {
+	public void testFindAllItems() throws Exception {
 		ItemsService itemsService = (ItemsService) this.applicationContext.getBean("itemsService");
 		System.out.println(itemsService.findAllItems());
 	}

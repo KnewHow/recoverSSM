@@ -50,7 +50,9 @@
 	<bean class="erongdu.exception.handler.ItemsExceptionHandler"></bean>
 
 
-	<!--setting SpringMVC interceptor -->
+	<!--setting SpringMVC interceptor
+	
+	 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<!-- /** will intercep path and sub-path -->
